@@ -7,29 +7,20 @@
 ## 工作流关系
 
 ```text
-一个功能想法（"完整过一遍"走 pm-flow；单点问题直接用对应 skill）
-    │
-    ▼
-feature-teardown    竞品怎么做的、我们是不是已经有了
-    │
-    ├─ 闸门A ▶ 已经有了，是入口/认知问题 → 给改入口建议，流程终止
-    ▼
-prior-art           有没有开源现成实现（可跳过；产出作 Effort 依据）
-    │
-    ▼
-requirement-eval    值不值得做（KANO 定位、RICE 打分 → 评估初稿）
-    │
-    ├─ 闸门B ▶ 建议「暂不做/补数据」→ 停，结论交还用户
-    ▼
-prd-writing         一页纸骨架 → 闸门C：骨架经用户确认才展开正文
-    │
-    ├─ 阶段3 调用 ▶ tracking-plan    埋点事件与成功指标（也可独立使用）
-    ▼
-产出落盘：产品文件夹下 prd/ eval/ tracking/
+pm-flow                        # 全流程路由：按序驱动五个，闸门处停下等人
+│
+├── feature-teardown           # 竞品怎么做的、我们是不是已经有了
+│      └─ GATE A               #   已经有了 → 给改入口建议，流程终止
+├── prior-art                  # 有没有开源现成实现（可跳过）
+├── requirement-eval           # 值不值得做：KANO 定位、RICE 打分
+│      └─ GATE B               #   建议「暂不做/补数据」→ 停，结论交还用户
+└── prd-writing                # 一页纸骨架 → 分档展开 → 配图硬校准
+       ├─ GATE C               #   骨架与档位经用户确认才展开正文
+       └── tracking-plan       # 埋点事件与成功指标（PRD 阶段3 调用）
 ```
 
-顺序、闸门与阶段间交接物由 [pm-flow](pm-flow/SKILL.md) 定义；五个执行 skill 保持独立可用，
-pm-flow 只接"从调研到 PRD 完整走一遍"的全流程意图。
+每个 skill 都可独立调用；[pm-flow](pm-flow/SKILL.md) 只接"从调研到 PRD 完整走一遍"的全流程意图，
+定义顺序、闸门与阶段间交接物（prior-art 的发现表作 RICE 的 Effort 依据、评估结论写进 PRD 背景）。
 
 想法还没成型的发散/访谈阶段，推荐上游原版 [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) 的 `interview-me` 和 `idea-refine`，与本套件无缝衔接。
 
@@ -91,16 +82,16 @@ Claude Code 用户可选配 PostToolUse hook 让校验自动兜底（加入 `~/.
 
 ## 四个 skill 一览
 
-| Skill | 做什么 | 独立可用 |
-|---|---|---|
-| [prd-writing](prd-writing/SKILL.md) | 一页纸骨架确认 → 分档展开（Lite/Standard/Complex 硬字数预算）→ ASCII 配图硬校准 → 调用 tracking-plan | ✅ |
-| [requirement-eval](requirement-eval/SKILL.md) | KANO 定位 + RICE 打分，产出评估初稿与建议；强制暴露估算假设、压低无数据支撑的 Confidence | ✅ |
-| [tracking-plan](tracking-plan/SKILL.md) | 先定北极星指标再列事件：成功指标 → 漏斗 → 事件清单 → 上报验收 | ✅ |
-| [feature-teardown](feature-teardown/SKILL.md) | 功能级竞品拆解：别人家怎么做、用户路径几步、我们是不是已经有了只是用户找不到 | ✅ |
-| [prior-art](prior-art/SKILL.md) | 动手写代码前查有没有开源现成的：发现分类（灵感/证据/可复用）、license 闸门；产出可作 RICE 的 Effort 依据和评审说服材料 | ✅ |
-| [pm-flow](pm-flow/SKILL.md) | 全流程路由：按序驱动上面五个，三个闸门处停下等人确认；只接全流程意图，不劫持单点请求 | ✅ |
+| Skill | 做什么 |
+|---|---|
+| [prd-writing](prd-writing/SKILL.md) | 一页纸骨架确认 → 分档展开（Lite/Standard/Complex 硬字数预算）→ ASCII 配图硬校准 → 调用 tracking-plan |
+| [requirement-eval](requirement-eval/SKILL.md) | KANO 定位、RICE 打分，产出评估初稿与建议；强制暴露估算假设、压低无数据支撑的 Confidence |
+| [tracking-plan](tracking-plan/SKILL.md) | 先定北极星指标再列事件：成功指标 → 漏斗 → 事件清单 → 上报验收 |
+| [feature-teardown](feature-teardown/SKILL.md) | 功能级竞品拆解：别人家怎么做、用户路径几步、我们是不是已经有了只是用户找不到 |
+| [prior-art](prior-art/SKILL.md) | 动手写代码前查有没有开源现成的：发现分类（灵感/证据/可复用）、license 闸门；产出作 RICE 的 Effort 依据和评审说服材料 |
+| [pm-flow](pm-flow/SKILL.md) | 全流程路由：按序驱动上面五个，三个闸门处停下等人确认；只接全流程意图，不劫持单点请求 |
 
-语言：全部为中文，面向中文 PM 工作流。
+全部为中文，面向中文 PM 工作流；每个 skill 均可单独安装、独立使用。
 
 ## License
 

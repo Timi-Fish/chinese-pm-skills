@@ -5,7 +5,7 @@ description: >-
   我们现在是不是其实已经有了只是用户找不到、有没有别的解法。
   触发词：竞品怎么做的、别人家怎么做的、有竞品吗、这个功能谁做过、拆一下竞品、
   我们是不是已经有了、feature-teardown。
-  轻量前置动作，不出完整竞品简报，不查开源代码实现。
+  轻量前置动作，不出完整竞品简报；不查开源代码实现（那个用本套件的 prior-art）。
 ---
 
 # Feature Teardown
@@ -19,9 +19,9 @@ description: >-
 **不管**：
 
 - 完整竞品简报（公司定位、pricing、win/loss、battle cards、market trend）→ 装有 product-management 插件时用其 competitive-brief，否则不在本 skill 范围
-- 开源库/能抄的代码 → 不在本 skill 范围
 - 这个需求值不值得做的 KANO/RICE 结论 → [requirement-eval](../requirement-eval/SKILL.md)（本套件内）
-- 方向还没定、要发散多个方向 → 推荐上游 addyosmani/agent-skills 的 idea-refine
+- 方向还没定、要发散多个方向 → 推荐上游 [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) 的 idea-refine
+- 开源库/能抄的代码 → [prior-art](../prior-art/SKILL.md)（本套件内）
 
 ## 当前产品从上下文解析，不预设
 

@@ -1,6 +1,6 @@
 # PM Skills
 
-四个给 AI 编程助手用的产品经理 skill：竞品拆解 → 需求评估 → PRD 写作 → 埋点设计。
+五个给 AI 编程助手用的产品经理 skill：竞品拆解、开源现状调研 → 需求评估 → PRD 写作 → 埋点设计。
 为 Claude Code 编写（标准 SKILL.md 格式），任何能读 skill 文件夹的 agent（Codex、Gemini CLI 等）均可使用。
 
 ## 工作流关系
@@ -8,8 +8,9 @@
 ```text
 一个功能想法
     │
-    ▼
-feature-teardown    竞品怎么做的（可选前置：别人做过吗、我们是不是已经有了）
+    ├─ 可选前置 ▶ feature-teardown  竞品怎么做的、我们是不是已经有了
+    │
+    ├─ 可选前置 ▶ prior-art  有没有开源现成实现（给 Effort 提供依据）
     │
     ▼
 requirement-eval    值不值得做（KANO 定位、RICE 打分 → 评估初稿）
@@ -30,7 +31,7 @@ prd-writing         怎么做（一页纸骨架确认 → 分档展开 → 配�
 全套（Claude Code）：
 
 ```bash
-git clone https://github.com/Timi-Fish/pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown} ~/.claude/skills/
+git clone https://github.com/Timi-Fish/pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown,prior-art} ~/.claude/skills/
 ```
 
 只要某一个（以 prd-writing 为例）：
@@ -89,8 +90,9 @@ Claude Code 用户可选配 PostToolUse hook 让校验自动兜底（加入 `~/.
 | [requirement-eval](requirement-eval/SKILL.md) | KANO 定位 + RICE 打分，产出评估初稿与建议；强制暴露估算假设、压低无数据支撑的 Confidence | ✅ |
 | [tracking-plan](tracking-plan/SKILL.md) | 先定北极星指标再列事件：成功指标 → 漏斗 → 事件清单 → 上报验收 | ✅ |
 | [feature-teardown](feature-teardown/SKILL.md) | 功能级竞品拆解：别人家怎么做、用户路径几步、我们是不是已经有了只是用户找不到 | ✅ |
+| [prior-art](prior-art/SKILL.md) | 动手写代码前查有没有开源现成的：发现分类（灵感/证据/可复用）、license 闸门；产出可作 RICE 的 Effort 依据和评审说服材料 | ✅ |
 
-语言：四个 skill 均为中文，面向中文 PM 工作流。
+语言：五个 skill 均为中文，面向中文 PM 工作流。
 
 ## License
 

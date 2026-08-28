@@ -1,4 +1,6 @@
-# Timi Chinese PM Skills
+# Chinese PM Skills
+
+> Product-manager skills for AI coding agents (Claude Code / Codex / Gemini CLI): competitor teardown → requirement evaluation (KANO/RICE) → PRD writing → tracking plan, with human-in-the-loop gates. Written in Chinese.
 
 给 AI 编程助手用的一套产品经理 skill：竞品拆解、开源现状调研 → 需求评估 → PRD 写作 → 埋点设计，
 外加一个把全流程串起来、在关键节点停下等人确认的路由（pm-flow）。
@@ -29,13 +31,13 @@ pm-flow                        # 全流程路由：按序驱动五个，闸门�
 全套（Claude Code）：
 
 ```bash
-git clone https://github.com/Timi-Fish/timi-chinese-pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown,prior-art,pm-flow} ~/.claude/skills/
+git clone https://github.com/Timi-Fish/chinese-pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown,prior-art,pm-flow} ~/.claude/skills/
 ```
 
 只要某一个（以 prd-writing 为例）：
 
 ```bash
-npx degit Timi-Fish/timi-chinese-pm-skills/prd-writing ~/.claude/skills/prd-writing
+npx degit Timi-Fish/chinese-pm-skills/prd-writing ~/.claude/skills/prd-writing
 ```
 
 每个 skill 均可独立使用：只装 tracking-plan 或 requirement-eval 时，它们会跳过共享上下文协议、改为会话内直接问答。装齐后自动共享产品上下文（见下）。

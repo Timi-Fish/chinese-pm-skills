@@ -1,28 +1,35 @@
 # PM Skills
 
-五个给 AI 编程助手用的产品经理 skill：竞品拆解、开源现状调研 → 需求评估 → PRD 写作 → 埋点设计。
+给 AI 编程助手用的一套产品经理 skill：竞品拆解、开源现状调研 → 需求评估 → PRD 写作 → 埋点设计，
+外加一个把全流程串起来、在关键节点停下等人确认的路由（pm-flow）。
 为 Claude Code 编写（标准 SKILL.md 格式），任何能读 skill 文件夹的 agent（Codex、Gemini CLI 等）均可使用。
 
 ## 工作流关系
 
 ```text
-一个功能想法
+一个功能想法（"完整过一遍"走 pm-flow；单点问题直接用对应 skill）
     │
-    ├─ 可选前置 ▶ feature-teardown  竞品怎么做的、我们是不是已经有了
+    ▼
+feature-teardown    竞品怎么做的、我们是不是已经有了
     │
-    ├─ 可选前置 ▶ prior-art  有没有开源现成实现（给 Effort 提供依据）
+    ├─ 闸门A ▶ 已经有了，是入口/认知问题 → 给改入口建议，流程终止
+    ▼
+prior-art           有没有开源现成实现（可跳过；产出作 Effort 依据）
     │
     ▼
 requirement-eval    值不值得做（KANO 定位、RICE 打分 → 评估初稿）
     │
+    ├─ 闸门B ▶ 建议「暂不做/补数据」→ 停，结论交还用户
     ▼
-prd-writing         怎么做（一页纸骨架确认 → 分档展开 → 配图硬校准）
+prd-writing         一页纸骨架 → 闸门C：骨架经用户确认才展开正文
     │
     ├─ 阶段3 调用 ▶ tracking-plan    埋点事件与成功指标（也可独立使用）
-    │
     ▼
 产出落盘：产品文件夹下 prd/ eval/ tracking/
 ```
+
+顺序、闸门与阶段间交接物由 [pm-flow](pm-flow/SKILL.md) 定义；五个执行 skill 保持独立可用，
+pm-flow 只接"从调研到 PRD 完整走一遍"的全流程意图。
 
 想法还没成型的发散/访谈阶段，推荐上游原版 [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) 的 `interview-me` 和 `idea-refine`，与本套件无缝衔接。
 
@@ -31,7 +38,7 @@ prd-writing         怎么做（一页纸骨架确认 → 分档展开 → 配�
 全套（Claude Code）：
 
 ```bash
-git clone https://github.com/Timi-Fish/pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown,prior-art} ~/.claude/skills/
+git clone https://github.com/Timi-Fish/pm-skills.git /tmp/pm-skills && cp -R /tmp/pm-skills/{prd-writing,tracking-plan,requirement-eval,feature-teardown,prior-art,pm-flow} ~/.claude/skills/
 ```
 
 只要某一个（以 prd-writing 为例）：
@@ -91,8 +98,9 @@ Claude Code 用户可选配 PostToolUse hook 让校验自动兜底（加入 `~/.
 | [tracking-plan](tracking-plan/SKILL.md) | 先定北极星指标再列事件：成功指标 → 漏斗 → 事件清单 → 上报验收 | ✅ |
 | [feature-teardown](feature-teardown/SKILL.md) | 功能级竞品拆解：别人家怎么做、用户路径几步、我们是不是已经有了只是用户找不到 | ✅ |
 | [prior-art](prior-art/SKILL.md) | 动手写代码前查有没有开源现成的：发现分类（灵感/证据/可复用）、license 闸门；产出可作 RICE 的 Effort 依据和评审说服材料 | ✅ |
+| [pm-flow](pm-flow/SKILL.md) | 全流程路由：按序驱动上面五个，三个闸门处停下等人确认；只接全流程意图，不劫持单点请求 | ✅ |
 
-语言：五个 skill 均为中文，面向中文 PM 工作流。
+语言：全部为中文，面向中文 PM 工作流。
 
 ## License
 
